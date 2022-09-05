@@ -1,0 +1,7 @@
+{
+  "name": "cursoreacionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
