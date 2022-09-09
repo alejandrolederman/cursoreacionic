@@ -19,7 +19,14 @@ export function removeCustomers(id: string) {
 
 }
 
-export function saveCustomers(customer: any) {
+export function saveCustomer(customer: any) {
+    let customers = searchCustomers();
+    customers.push(customer)
+    localStorage["customers"] = JSON.stringify(customers)
+
+}
+
+export function searchCustomerById(customer: any) {
     let customers = searchCustomers();
     customers.push(customer)
     localStorage["customers"] = JSON.stringify(customers)

@@ -1,11 +1,11 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 // import ExploreContainer from '../../components/ExploreContainer';
 import '../Page.css';
 import '../../theme/variables.css';
 import { add, close, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
-import { removeCustomers, saveCustomers, searchCustomers } from './CustomerApi';
+import { removeCustomers, saveCustomer, searchCustomers } from './CustomerApi';
 
 const CustomerList: React.FC = () => {
 
@@ -13,9 +13,11 @@ const CustomerList: React.FC = () => {
 
     const [clientes, setClientes] = useState<any>([]);
 
+    const history = useHistory();
+
     useEffect(() => {
-        search();
-    }, []);
+      search();
+    }, [history.location.pathname]);
 
     const search = () => {
         let result = searchCustomers();
@@ -28,6 +30,10 @@ const CustomerList: React.FC = () => {
 
     }
 
+    const addCustomer = () => {
+        history.push('/page/customer/new');
+      }
+
     const pruebaLocalstorange = () => {
         const ejemplo = {
             id: "1",
@@ -38,7 +44,7 @@ const CustomerList: React.FC = () => {
             addres: "maturin 2733"
 
         }
-        saveCustomers(ejemplo);
+        saveCustomer(ejemplo);
     }
 
     return (
@@ -65,7 +71,7 @@ const CustomerList: React.FC = () => {
                         <IonTitle>Gestion de Cleintes</IonTitle>
 
                         <IonItem>
-                            <IonButton color="primary" fill="solid" slot="end" size="default">
+                            <IonButton onClick={addCustomer} color="primary" fill="solid" slot="end" size="default">
                                 <IonIcon icon={add} />
                                 Agregar Cliente
                             </IonButton>
